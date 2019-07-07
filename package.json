@@ -1,0 +1,29 @@
+{
+  "name": "multiplayer-text-based-game",
+  "version": "0.1.0",
+  "description": "Just another multiplayer text-based game.",
+  "dependencies": {
+    "express": "^4.15.2",
+    "golden-layout": "^1.5.9",
+    "jquery": "^3.4.1",
+    "npm-run-all": "^4.1.5",
+    "parcel-bundler": "^1.12.3",
+    "socket.io": "^2.2.0",
+    "ts-node": "^8.3.0",
+    "ts-node-dev": "^1.0.0-pre.40",
+    "typescript": "^3.5.2"
+  },
+  "scripts": {
+    "start": "run-p parcel-watch ts-node-dev",
+    "parcel-watch": "parcel watch src/client/index.html",
+    "parcel-build": "parcel build src/client/index.html",
+    "ts-node": "ts-node src/server/server.ts",
+    "ts-node-dev": "ts-node-dev src/server/server.ts"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.3.30",
+    "@types/socket.io": "^2.1.2",
+    "@types/socket.io-client": "^1.4.32",
+    "sass": "^1.22.3"
+  }
+}
