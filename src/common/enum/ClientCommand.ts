@@ -1,6 +1,6 @@
-export enum ClientCommands {
+export enum ClientCommand {
     Say = "Say",
     Smile = "Smile",
-    SmileTo = "SmileTo",
+    Get = "Get",
     Sleep = "Sleep"
 }
