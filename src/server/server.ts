@@ -1,17 +1,12 @@
-import express = require('express');
-import {createServer} from "http";
-import * as SocketIo from 'socket.io';
-import {join} from "path";
-
+import * as express from 'express';
 import {ServerToClientEvent} from "../common/enum/ServerToClientEvent";
 import {ClientToServerEvent} from "../common/enum/ClientToServerEvent";
 import {Socket} from "socket.io";
 import {ClientCommand} from "../common/enum/ClientCommand";
-
-const app = express();
-const http = createServer(app);
-const io = SocketIo(http);
-const port = process.env.PORT || 3000;
+import {io} from "./instances/io";
+import {http} from "./instances/http";
+import {join} from "path";
+import {app} from "./instances/app";
 
 const commandToFunctionMap:Record<ClientCommand, (socket:Socket, commandArguments:string) => void> = {
     Say: (socket:Socket, commandArguments:string) => {
@@ -62,8 +57,6 @@ const eventToActionMap:Record<ClientToServerEvent, Function> = {
     }
 };
 
-app.use(express.static(join(__dirname, '..', '..', 'dist')));
-
 io.on('connection', socket => {
     io.emit(ServerToClientEvent.AppendToEventsPanel, `${socket.id} has joined!`);
     Object.keys(eventToActionMap).forEach(clientToServerEvent => {
@@ -72,6 +65,10 @@ io.on('connection', socket => {
         });
     });
 });
+
+app.use(express.static(join(__dirname, '..', '..', 'dist')));
+
+const port = process.env.PORT || 3000;
 
 http.listen(port, () => {
     console.log('listening on *:' + port);
