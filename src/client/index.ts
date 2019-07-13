@@ -30,7 +30,7 @@ layout.registerComponent('Events', (container) => {
     jQuery(container.getElement()).append(terminalContainer);
 
     socket.on(ServerToClientEvent.AppendToEventsPanel, (message) => {
-        terminalContainer.append(jQuery.parseHTML(message));
+        terminalContainer.append(jQuery.parseHTML(`<div>${message}</div>`));
     });
 });
 

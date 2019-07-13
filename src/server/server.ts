@@ -15,16 +15,16 @@ const port = process.env.PORT || 3000;
 
 const commandToFunctionMap:Record<ClientCommand, (socket:Socket, commandArguments:string) => void> = {
     Say: (socket:Socket, commandArguments:string) => {
-        io.emit(ServerToClientEvent.AppendToEventsPanel, `<div>${socket.id} says: ${commandArguments}</div>`);
+        io.emit(ServerToClientEvent.AppendToEventsPanel, `${socket.id} says: ${commandArguments}`);
     },
     Smile: (socket:Socket, commandArguments:string) => {
         const match = commandArguments.match(/(?<to>[A-Za-z]+)/);
         let divToAppend = '';
 
         if (match) {
-            divToAppend = `<div>${socket.id} smiles to ${match.groups.to}.</div>`;
+            divToAppend = `${socket.id} smiles to ${match.groups.to}.`;
         } else {
-            divToAppend = `<div>${socket.id} smiles.</div>`;
+            divToAppend = `${socket.id} smiles.`;
         }
 
         io.emit(ServerToClientEvent.AppendToEventsPanel, divToAppend);
@@ -35,17 +35,17 @@ const commandToFunctionMap:Record<ClientCommand, (socket:Socket, commandArgument
         let divToAppend = '';
 
         if (match1) {
-            divToAppend = `<div>${socket.id} gets ${match1.groups.what} from ${match1.groups.where}.</div>`;
+            divToAppend = `${socket.id} gets ${match1.groups.what} from ${match1.groups.where}.`;
         } else if (match2) {
-            divToAppend = `<div>${socket.id} gets ${match2.groups.what}.</div>`;
+            divToAppend = `${socket.id} gets ${match2.groups.what}.`;
         } else {
-            divToAppend = `<div>Get what?</div>`;
+            divToAppend = 'Get what!?';
         }
 
         io.emit(ServerToClientEvent.AppendToEventsPanel, divToAppend);
     },
     Sleep: () => {
-        io.emit(ServerToClientEvent.AppendToEventsPanel, '<div>You start sleeping.</div>');
+        io.emit(ServerToClientEvent.AppendToEventsPanel, 'You start sleeping.');
     }
 };
 
@@ -55,7 +55,7 @@ const eventToActionMap:Record<ClientToServerEvent, Function> = {
         const [command, ...commandArguments] = commandAsArray;
         const commandFound = Object.keys(commandToFunctionMap).find(currentCommand => currentCommand.toLowerCase() === command.toLowerCase());
         if (!commandFound) {
-            socket.emit(ServerToClientEvent.AppendToEventsPanel, `<div>${command}: command not found.</div>`);
+            socket.emit(ServerToClientEvent.AppendToEventsPanel, `${command}: command not found.`);
             return;
         }
         commandToFunctionMap[commandFound](socket, commandArguments.join(' '));
@@ -65,6 +65,7 @@ const eventToActionMap:Record<ClientToServerEvent, Function> = {
 app.use(express.static(join(__dirname, '..', '..', 'dist')));
 
 io.on('connection', socket => {
+    io.emit(ServerToClientEvent.AppendToEventsPanel, `${socket.id} has joined!`);
     Object.keys(eventToActionMap).forEach(clientToServerEvent => {
         socket.on(clientToServerEvent, data => {
             eventToActionMap[clientToServerEvent](socket, data);
