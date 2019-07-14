@@ -17,7 +17,7 @@ layout.registerComponent(componentConfig.componentName, container => {
 
   const removeOldEvents = () => {
     const eventsInHistory = terminalContainer.children();
-    if (eventsInHistory.length > 5) eventsInHistory.first().remove();
+    if (eventsInHistory.length > 100) eventsInHistory.first().remove();
   };
 
   layout.on(ClientToServerEvent.ExecuteCommand, event => {
