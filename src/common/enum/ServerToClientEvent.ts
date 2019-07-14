@@ -1,3 +1,3 @@
 export enum ServerToClientEvent {
-    AppendToEventsPanel = "AppendToEventsPanel"
+  AppendToEventsPanel = "AppendToEventsPanel"
 }

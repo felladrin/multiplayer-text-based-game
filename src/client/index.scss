@@ -1,24 +1,24 @@
 .form {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    grid-column: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  grid-column: 2;
 }
 
 .messageBox {
-    border: 0;
-    flex-grow: 1;
-    padding: 0.5em 0.75em;
-    outline: none;
+  border: 0;
+  flex-grow: 1;
+  padding: 0.5em 0.75em;
+  outline: none;
 }
 
 .sendButton {
-    padding: 0.5em 0.75em;
+  padding: 0.5em 0.75em;
 }
 
 .eventsDiv {
-    width: 100%;
-    height: 100%;
-    padding: 0.5em 0.75em;
-    color: white;
+  width: 100%;
+  height: 100%;
+  padding: 0.5em 0.75em;
+  color: white;
 }
