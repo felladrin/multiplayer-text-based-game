@@ -1,12 +1,12 @@
-import { connect } from "socket.io-client";
 import jQuery = require("jquery");
 window["$"] = window["jQuery"] = jQuery;
 import GoldenLayout = require("golden-layout");
-import "golden-layout/src/css/goldenlayout-base.css";
-import "golden-layout/src/css/goldenlayout-dark-theme.css";
+import "golden-layout/src/less/goldenlayout-base.less";
+import "golden-layout/src/less/goldenlayout-dark-theme.less";
 import "./index.scss";
 import { ServerToClientEvent } from "../common/enum/ServerToClientEvent";
 import { ClientToServerEvent } from "../common/enum/ClientToServerEvent";
+import { connect } from "socket.io-client";
 
 const socket = connect();
 
