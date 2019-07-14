@@ -12,8 +12,8 @@
     "dev": "run-p parcel-watch ts-node-dev",
     "parcel-watch": "parcel watch src/client/index.html",
     "parcel-build": "parcel build src/client/index.html --no-source-maps",
-    "ts-node": "ts-node src/server/server.ts",
-    "ts-node-dev": "ts-node-dev src/server/server.ts"
+    "ts-node": "ts-node src/server/index.ts",
+    "ts-node-dev": "ts-node-dev src/server/index.ts"
   },
   "dependencies": {
     "express": "^4.15.2",
