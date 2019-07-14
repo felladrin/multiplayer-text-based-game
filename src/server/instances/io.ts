@@ -1,6 +1,6 @@
 import SocketIo = require("socket.io");
 import { http } from "./http";
-import { ServerToClientEvent } from "../../common/enum/ServerToClientEvent";
+import { ServerToClientEvent } from "../../shared/enum/ServerToClientEvent";
 import { eventToActionMap } from "./eventToActionMap";
 
 export const io = SocketIo(http);

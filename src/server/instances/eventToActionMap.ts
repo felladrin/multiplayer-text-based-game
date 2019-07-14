@@ -1,8 +1,8 @@
-import { ClientToServerEvent } from "../../common/enum/ClientToServerEvent";
+import { ClientToServerEvent } from "../../shared/enum/ClientToServerEvent";
 import { Socket } from "socket.io";
-import { Command, CommandParams } from "../../common/types/Command";
+import { Command, CommandParams } from "../../shared/types/Command";
 import { doForEachAvailableCommand } from "./commandsRegistry";
-import { ServerToClientEvent } from "../../common/enum/ServerToClientEvent";
+import { ServerToClientEvent } from "../../shared/enum/ServerToClientEvent";
 
 export const eventToActionMap: Record<ClientToServerEvent, Function> = {
   ExecuteCommand: (socket: Socket, data: string) => {

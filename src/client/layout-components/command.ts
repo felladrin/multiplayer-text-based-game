@@ -1,4 +1,4 @@
-import { ClientToServerEvent } from "../../common/enum/ClientToServerEvent";
+import { ClientToServerEvent } from "../../shared/enum/ClientToServerEvent";
 import { jQuery } from "../instances/jquery";
 import { layout } from "../instances/layout";
 import { socket } from "../instances/socket";

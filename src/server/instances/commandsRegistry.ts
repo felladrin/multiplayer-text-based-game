@@ -1,5 +1,5 @@
-import { Command } from "../../common/types/Command";
-import { KeyOfFilteredByType } from "../../common/types/KeyOfFilteredByType";
+import { Command } from "../../shared/types/Command";
+import { KeyOfFilteredByType } from "../../shared/types/KeyOfFilteredByType";
 
 const commandsRegistry: Command[] = [];
 

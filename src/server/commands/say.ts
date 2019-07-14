@@ -1,4 +1,4 @@
-import { ServerToClientEvent } from "../../common/enum/ServerToClientEvent";
+import { ServerToClientEvent } from "../../shared/enum/ServerToClientEvent";
 import { io } from "../instances/io";
 import { registerCommand } from "../instances/commandsRegistry";
 
