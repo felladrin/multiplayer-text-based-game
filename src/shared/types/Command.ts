@@ -6,5 +6,5 @@ export type Command = {
   name: string;
   description: string;
   matchers: RegExp[];
-  action: (socket: Socket, params?: CommandParams) => void;
+  action: (socket: Socket, params: CommandParams) => void;
 };

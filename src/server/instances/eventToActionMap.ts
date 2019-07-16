@@ -6,8 +6,8 @@ import { ServerToClientEvent } from "../../shared/enum/ServerToClientEvent";
 
 export const eventToActionMap: Record<ClientToServerEvent, Function> = {
   ExecuteCommand: (socket: Socket, data: string) => {
-    let commandFound: Command = null;
-    let commandParams: CommandParams = null;
+    let commandFound: Command | undefined;
+    let commandParams: CommandParams = {};
 
     doForEachAvailableCommand(command => {
       if (commandFound) return;
@@ -16,7 +16,7 @@ export const eventToActionMap: Record<ClientToServerEvent, Function> = {
         const match = data.trim().match(matcher);
         if (match) {
           commandFound = command;
-          commandParams = match.groups;
+          commandParams = match.groups || {};
         }
       });
     });
