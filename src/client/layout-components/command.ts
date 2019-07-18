@@ -1,6 +1,6 @@
 import { ClientToServerEvent } from "../../shared/enum/ClientToServerEvent";
 import { jQuery } from "../instances/jquery";
-import { layout } from "../instances/layout";
+import { addToLayout, layout } from "../instances/layout";
 import { socket } from "../instances/socket";
 import { ComponentConfig } from "golden-layout";
 
@@ -8,6 +8,8 @@ const componentConfig: ComponentConfig = {
   type: "component",
   componentName: "Command"
 };
+
+addToLayout(componentConfig);
 
 layout.registerComponent(componentConfig.componentName, container => {
   const form = jQuery<HTMLFormElement>('<form class="form"/>');
@@ -34,8 +36,4 @@ layout.registerComponent(componentConfig.componentName, container => {
   });
 
   jQuery(container.getElement()).append(form);
-});
-
-layout.on("initialised", () => {
-  layout.root.contentItems[0].addChild(componentConfig);
 });

@@ -1,6 +1,6 @@
 import { ServerToClientEvent } from "../../shared/enum/ServerToClientEvent";
 import { jQuery } from "../instances/jquery";
-import { layout } from "../instances/layout";
+import { addToLayout, layout } from "../instances/layout";
 import { socket } from "../instances/socket";
 import { ComponentConfig } from "golden-layout";
 import { ClientToServerEvent } from "../../shared/enum/ClientToServerEvent";
@@ -9,6 +9,8 @@ const componentConfig: ComponentConfig = {
   type: "component",
   componentName: "Events"
 };
+
+addToLayout(componentConfig);
 
 layout.registerComponent(componentConfig.componentName, container => {
   const terminalContainer = jQuery<HTMLDivElement>('<div class="eventsDiv"/>');
@@ -35,8 +37,4 @@ layout.registerComponent(componentConfig.componentName, container => {
     );
     removeOldEvents();
   });
-});
-
-layout.on("initialised", () => {
-  layout.root.contentItems[0].addChild(componentConfig);
 });
