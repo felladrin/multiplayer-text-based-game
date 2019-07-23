@@ -17,18 +17,18 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "golden-layout": "^1.5.9",
-    "jquery": "^3.4.1",
+    "normalize.css": "^8.0.1",
     "npm-run-all": "^4.1.5",
     "parcel-bundler": "^1.12.3",
     "require-all": "^3.0.0",
     "socket.io": "^2.2.0",
+    "textarea-autogrow": "^1.0.0",
+    "ts-key-enum": "^2.0.0",
     "ts-node-dev": "^1.0.0-pre.40",
     "typescript": "^3.5.3"
   },
   "devDependencies": {
     "@types/express": "^4.17.0",
-    "@types/jquery": "^3.3.30",
     "@types/socket.io": "^2.1.2",
     "@types/socket.io-client": "^1.4.32",
     "husky": "^3.0.1",

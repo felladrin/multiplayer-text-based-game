@@ -1,32 +1,42 @@
-.form {
-  width: 100%;
+$background-color: #222426;
+$input-text-color: #f1ffd0;
+
+div#root {
   height: 100%;
-  display: flex;
-  grid-column: 2;
-}
-
-.messageBox {
-  border: 0;
-  flex-grow: 1;
-  padding: 0.5em 0.75em;
-  outline: none;
-}
-
-.sendButton {
-  padding: 0.5em 0.75em;
-}
-
-.eventsDiv {
-  padding: 0.5em 0.75em;
+  width: 100%;
+  background-color: $background-color;
   color: white;
-  font-family: sans-serif;
-
-  .command {
-    font-style: italic;
-    color: lightblue;
-  }
+  font-family: "Open Sans", sans-serif;
 }
 
-.importantOverflowY {
-  overflow-y: auto !important;
+div#output {
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 16px 1em 5em;
+}
+
+div#input {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+
+  label {
+    display: none;
+  }
+
+  textarea#command {
+    flex: 1;
+    max-height: 50vh;
+    resize: none;
+    padding: 5px 10px;
+    border: none;
+    border-top: 2px solid darkorange;
+    color: $input-text-color;
+    background-color: $background-color;
+  }
 }
