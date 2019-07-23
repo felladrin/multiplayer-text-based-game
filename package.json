@@ -31,10 +31,10 @@
     "@types/jquery": "^3.3.30",
     "@types/socket.io": "^2.1.2",
     "@types/socket.io-client": "^1.4.32",
-    "husky": "^3.0.0",
+    "husky": "^3.0.1",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1",
-    "sass": "^1.22.5"
+    "sass": "^1.22.7"
   },
   "husky": {
     "hooks": {
