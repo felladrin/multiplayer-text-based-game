@@ -1,4 +1,4 @@
-import SocketIo = require("socket.io");
+import SocketIo from "socket.io";
 import { http } from "./http";
 import { ServerToClientEvent } from "../../shared/enum/ServerToClientEvent";
 import { eventToActionMap } from "./eventToActionMap";
