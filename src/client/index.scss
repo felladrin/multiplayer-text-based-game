@@ -1,10 +1,13 @@
 $background-color: #222426;
 $input-text-color: #f1ffd0;
 
+body {
+  background-color: $background-color;
+}
+
 div#root {
   height: 100%;
   width: 100%;
-  background-color: $background-color;
   color: white;
   font-family: "Open Sans", sans-serif;
 }
