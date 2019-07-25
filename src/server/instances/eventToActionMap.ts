@@ -3,6 +3,8 @@ import { Socket } from "socket.io";
 import { Command, CommandParams } from "../../shared/types/Command";
 import { doForEachAvailableCommand } from "./commandsRegistry";
 import { ServerToClientEvent } from "../../shared/enum/ServerToClientEvent";
+import { findOnlinePlayerBySocket } from "./playersOnlineList";
+import { io } from "./io";
 
 export const eventToActionMap: Record<ClientToServerEvent, Function> = {
   ExecuteCommand: (socket: Socket, data: string) => {
@@ -27,6 +29,15 @@ export const eventToActionMap: Record<ClientToServerEvent, Function> = {
       socket.emit(
         ServerToClientEvent.AppendToEventsPanel,
         `Command not found. Type 'help' to see the list of commands available.`
+      );
+    }
+  },
+  disconnect: (socket: Socket) => {
+    const onlinePlayer = findOnlinePlayerBySocket(socket);
+    if (onlinePlayer) {
+      io.emit(
+        ServerToClientEvent.AppendToEventsPanel,
+        `${onlinePlayer.nickname} has left the game.`
       );
     }
   }
