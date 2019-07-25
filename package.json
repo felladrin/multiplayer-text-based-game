@@ -13,7 +13,7 @@
     "parcel-watch": "parcel watch src/client/index.html -d build/client",
     "parcel-build": "parcel build src/client/index.html -d build/client --no-source-maps",
     "compile-and-run": "(cd src/server && tsc) && (cd build/server && node .)",
-    "ts-node-dev": "ts-node-dev src/server/index.ts"
+    "ts-node-dev": "ts-node-dev --project src/server/tsconfig.json src/server/index.ts"
   },
   "dependencies": {
     "express": "^4.17.1",
