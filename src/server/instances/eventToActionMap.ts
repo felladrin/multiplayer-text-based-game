@@ -21,14 +21,13 @@ export const eventToActionMap: Record<ClientToServerEvent, Function> = {
       });
     });
 
-    if (!commandFound) {
+    if (commandFound) {
+      commandFound.action(socket, commandParams);
+    } else {
       socket.emit(
         ServerToClientEvent.AppendToEventsPanel,
-        `Command not found.`
+        `Command not found. Type 'help' to see the list of commands available.`
       );
-      return;
     }
-
-    commandFound.action(socket, commandParams);
   }
 };
