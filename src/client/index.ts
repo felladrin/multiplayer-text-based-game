@@ -23,9 +23,13 @@ commandTextarea.addEventListener("keypress", (event: KeyboardEvent) => {
 });
 
 socket.on(ServerToClientEvent.print, (event: string) => {
+  const isScrollAtBottom =
+    Math.floor(outputDiv.scrollHeight - outputDiv.scrollTop) ===
+    Math.floor(outputDiv.clientHeight);
   const divToAppend = document.createElement("div") as HTMLDivElement;
   divToAppend.title = new Date().toString();
   divToAppend.innerHTML = event;
   outputDiv.append(divToAppend);
   if (outputDiv.children.length > 100) outputDiv.firstChild.remove();
+  if (isScrollAtBottom) outputDiv.scrollTo(0, outputDiv.scrollHeight);
 });
