@@ -1,4 +1,4 @@
 export enum ClientToServerEvent {
-  ExecuteCommand = "ExecuteCommand",
+  executeCommand = "executeCommand",
   disconnect = "disconnect"
 }

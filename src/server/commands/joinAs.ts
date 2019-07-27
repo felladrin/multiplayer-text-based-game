@@ -1,17 +1,24 @@
 import { ServerToClientEvent } from "../../shared/enum/ServerToClientEvent";
-import { io } from "../instances/io";
-import { registerCommand } from "../instances/commandsRegistry";
-import { addOnlinePlayer } from "../instances/playersOnlineList";
+import { socketIo } from "../instances/socketIo";
+import { Commands } from "../../shared/classes/commands/Commands";
+import { ConnectedPlayers } from "../../shared/classes/ConnectedPlayers";
+import { PlayableCharacter } from "../../shared/classes/characters/PlayableCharacter";
+import { cityCenter } from "../rooms/cityCenter";
+import { Command } from "../../shared/classes/commands/Command";
 
-registerCommand({
-  name: "Join As",
-  description: "Join the game with an specific nickname.",
-  matchers: [/^join as (?<nickname>.*)$/i],
-  action: (socket, params) => {
-    addOnlinePlayer({ nickname: params.nickname, socket });
-    io.emit(
-      ServerToClientEvent.AppendToEventsPanel,
-      `${params.nickname} has joined the game!`
-    );
-  }
-});
+Commands.register(
+  new Command(
+    "Join As",
+    "Join the game with an specific name.",
+    [/^join as (?<name>.*)$/i],
+    (socket, params) => {
+      ConnectedPlayers.register(
+        new PlayableCharacter(params.name, cityCenter, socket)
+      );
+      socketIo.emit(
+        ServerToClientEvent.print,
+        `${params.name} has joined the game!`
+      );
+    }
+  )
+);

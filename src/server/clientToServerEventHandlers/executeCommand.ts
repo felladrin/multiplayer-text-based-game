@@ -1,17 +1,18 @@
+import { ClientToServerEventHandlers } from "../../shared/classes/ClientToServerEventHandlers";
 import { ClientToServerEvent } from "../../shared/enum/ClientToServerEvent";
 import { Socket } from "socket.io";
-import { Command, CommandParams } from "../../shared/types/Command";
-import { doForEachAvailableCommand } from "./commandsRegistry";
+import { Commands } from "../../shared/classes/commands/Commands";
 import { ServerToClientEvent } from "../../shared/enum/ServerToClientEvent";
-import { findOnlinePlayerBySocket } from "./playersOnlineList";
-import { io } from "./io";
+import { CommandParams } from "../../shared/types/CommandParams";
+import { Command } from "../../shared/classes/commands/Command";
 
-export const eventToActionMap: Record<ClientToServerEvent, Function> = {
-  ExecuteCommand: (socket: Socket, data: string) => {
+ClientToServerEventHandlers.register(
+  ClientToServerEvent.executeCommand,
+  (socket: Socket, data: string) => {
     let commandFound: Command | undefined;
     let commandParams: CommandParams = {};
 
-    doForEachAvailableCommand(command => {
+    Commands.forEach(command => {
       if (commandFound) return;
 
       command.matchers.forEach(matcher => {
@@ -27,18 +28,9 @@ export const eventToActionMap: Record<ClientToServerEvent, Function> = {
       commandFound.action(socket, commandParams);
     } else {
       socket.emit(
-        ServerToClientEvent.AppendToEventsPanel,
+        ServerToClientEvent.print,
         `Command not found. Type 'help' to see the list of commands available.`
       );
     }
-  },
-  disconnect: (socket: Socket) => {
-    const onlinePlayer = findOnlinePlayerBySocket(socket);
-    if (onlinePlayer) {
-      io.emit(
-        ServerToClientEvent.AppendToEventsPanel,
-        `${onlinePlayer.nickname} has left the game.`
-      );
-    }
   }
-};
+);

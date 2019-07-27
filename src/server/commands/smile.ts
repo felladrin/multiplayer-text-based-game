@@ -1,18 +1,18 @@
 import { ServerToClientEvent } from "../../shared/enum/ServerToClientEvent";
-import { io } from "../instances/io";
-import { registerCommand } from "../instances/commandsRegistry";
-import { findOnlinePlayerBySocket } from "../instances/playersOnlineList";
+import { socketIo } from "../instances/socketIo";
+import { Commands } from "../../shared/classes/commands/Commands";
+import { ConnectedPlayers } from "../../shared/classes/ConnectedPlayers";
+import { Command } from "../../shared/classes/commands/Command";
 
-registerCommand({
-  name: "Smile",
-  description: "Say something to everyone in the room.",
-  matchers: [/^smile$/i],
-  action: socket => {
-    const onlinePlayer = findOnlinePlayerBySocket(socket);
-    if (onlinePlayer == null) return;
-    io.emit(
-      ServerToClientEvent.AppendToEventsPanel,
-      `${onlinePlayer.nickname} smiles.`
-    );
-  }
-});
+Commands.register(
+  new Command(
+    "Smile",
+    "Say something to everyone in the room.",
+    [/^smile$/i],
+    socket => {
+      const player = ConnectedPlayers.findBySocket(socket);
+      if (player == null) return;
+      socketIo.emit(ServerToClientEvent.print, `${player.name} smiles.`);
+    }
+  )
+);

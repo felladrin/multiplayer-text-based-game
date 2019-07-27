@@ -18,11 +18,11 @@ commandTextarea.addEventListener("keypress", (event: KeyboardEvent) => {
   if (event.key !== Key.Enter) return;
   event.preventDefault();
   const command = commandTextarea.value.trim();
-  if (command.length) socket.emit(ClientToServerEvent.ExecuteCommand, command);
+  if (command.length) socket.emit(ClientToServerEvent.executeCommand, command);
   commandTextarea.value = "";
 });
 
-socket.on(ServerToClientEvent.AppendToEventsPanel, (event: string) => {
+socket.on(ServerToClientEvent.print, (event: string) => {
   const divToAppend = document.createElement("div") as HTMLDivElement;
   divToAppend.title = new Date().toString();
   divToAppend.innerHTML = event;

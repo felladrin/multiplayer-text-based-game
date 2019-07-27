@@ -1,10 +1,10 @@
 import { createServer } from "http";
-import { app } from "./app";
+import { expressApp } from "./expressApp";
 
-export const http = createServer(app);
+export const webServer = createServer(expressApp);
 
 const port = process.env.PORT || 3000;
 
-http.listen(port, () => {
+webServer.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });

@@ -1,18 +1,21 @@
 import { ServerToClientEvent } from "../../shared/enum/ServerToClientEvent";
-import { io } from "../instances/io";
-import { registerCommand } from "../instances/commandsRegistry";
-import { findOnlinePlayerBySocket } from "../instances/playersOnlineList";
+import { socketIo } from "../instances/socketIo";
+import { Commands } from "../../shared/classes/commands/Commands";
+import { ConnectedPlayers } from "../../shared/classes/ConnectedPlayers";
+import { Command } from "../../shared/classes/commands/Command";
 
-registerCommand({
-  name: "Smile To Someone",
-  description: "Smile to someone in the room.",
-  matchers: [/^smile to (?<who>[A-Za-z]+)$/i, /^smile (?<who>[A-Za-z]+)$/i],
-  action: (socket, params) => {
-    const onlinePlayer = findOnlinePlayerBySocket(socket);
-    if (onlinePlayer == null) return;
-    io.emit(
-      ServerToClientEvent.AppendToEventsPanel,
-      `${onlinePlayer.nickname} smiles to ${params.who}.`
-    );
-  }
-});
+Commands.register(
+  new Command(
+    "Smile To Someone",
+    "Smile to someone in the room.",
+    [/^smile to (?<who>[A-Za-z]+)$/i, /^smile (?<who>[A-Za-z]+)$/i],
+    (socket, params) => {
+      const player = ConnectedPlayers.findBySocket(socket);
+      if (player == null) return;
+      socketIo.emit(
+        ServerToClientEvent.print,
+        `${player.name} smiles to ${params.who}.`
+      );
+    }
+  )
+);
