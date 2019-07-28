@@ -5,6 +5,7 @@ import { ConnectedPlayers } from "../../shared/classes/ConnectedPlayers";
 import { PlayableCharacter } from "../../shared/classes/characters/PlayableCharacter";
 import { cityCenter } from "../rooms/cityCenter";
 import { Command } from "../../shared/classes/commands/Command";
+import { upperCaseFirst } from "change-case";
 
 Commands.register(
   new Command(
@@ -12,12 +13,13 @@ Commands.register(
     "Join the game with an specific name.",
     [/^join as (?<name>.*)$/i],
     (socket, params) => {
+      const upperCasedName = upperCaseFirst(params.name);
       ConnectedPlayers.register(
-        new PlayableCharacter(params.name, cityCenter, socket)
+        new PlayableCharacter(upperCasedName, cityCenter, socket)
       );
       socketIo.emit(
         ServerToClientEvent.print,
-        `${params.name} has joined the game!`
+        `${upperCasedName} has joined the game!`
       );
     }
   )
