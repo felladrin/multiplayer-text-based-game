@@ -3,14 +3,13 @@ import { ClientToServerEvent } from "../../shared/enum/ClientToServerEvent";
 import { Socket } from "socket.io";
 import { Commands } from "../../shared/classes/commands/Commands";
 import { ServerToClientEvent } from "../../shared/enum/ServerToClientEvent";
-import { CommandParams } from "../../shared/types/CommandParams";
 import { Command } from "../../shared/classes/commands/Command";
 
 ClientToServerEventHandlers.register(
   ClientToServerEvent.executeCommand,
   (socket: Socket, data: string) => {
     let commandFound: Command | undefined;
-    let commandParams: CommandParams = {};
+    let commandParams: Record<string, string> = {};
 
     Commands.forEach(command => {
       if (commandFound) return;

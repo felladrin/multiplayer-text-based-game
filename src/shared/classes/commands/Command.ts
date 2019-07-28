@@ -1,17 +1,16 @@
 import { Socket } from "socket.io";
-import { CommandParams } from "../../types/CommandParams";
 
 export class Command {
   name: string;
   description: string;
   matchers: RegExp[];
-  action: (socket: Socket, params: CommandParams) => void;
+  action: (socket: Socket, params: Record<string, string>) => void;
 
   constructor(
     name: string,
     description: string,
     matchers: RegExp[],
-    action: (socket: Socket, params: CommandParams) => void
+    action: (socket: Socket, params: Record<string, string>) => void
   ) {
     this.name = name;
     this.description = description;
