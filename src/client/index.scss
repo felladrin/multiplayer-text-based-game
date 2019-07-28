@@ -16,29 +16,30 @@ div#root {
   display: grid;
   grid-template-areas: "output" "input";
   grid-template-rows: 1fr;
-}
 
-div#output {
-  grid-area: output;
-  overflow-y: auto;
-  padding: 0.5em;
-}
-
-div#input {
-  grid-area: input;
-  border-top: 2px solid darkorange;
-  padding: 0.5em;
-
-  label {
-    display: none;
+  div#output {
+    grid-area: output;
+    overflow-y: auto;
+    padding: 0.5em;
+    line-height: 1.4em;
   }
 
-  textarea#command {
-    width: 100%;
-    resize: none;
-    outline: none;
-    border: none;
-    color: $input-text-color;
-    background-color: $background-color;
+  div#input {
+    grid-area: input;
+    border-top: 2px solid darkorange;
+    padding: 0.5em;
+
+    label {
+      display: none;
+    }
+
+    textarea#command {
+      width: 100%;
+      resize: none;
+      outline: none;
+      border: none;
+      color: $input-text-color;
+      background-color: $background-color;
+    }
   }
 }
