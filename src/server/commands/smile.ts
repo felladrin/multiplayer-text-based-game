@@ -9,7 +9,7 @@ Commands.register(
     "Smile",
     "Say something to everyone in the room.",
     [/^smile$/i],
-    socket => {
+    (socket): void => {
       const player = ConnectedPlayers.findBySocket(socket);
       if (player == null) return;
       socketIo.emit(ServerToClientEvent.print, `${player.name} smiles.`);

@@ -9,7 +9,7 @@ Commands.register(
     "Say",
     "Say something to everyone in the room.",
     [/^say (?<what>.*)$/i],
-    (socket, params) => {
+    (socket, params): void => {
       const player = ConnectedPlayers.findBySocket(socket);
       if (player == null) return;
       socketIo.emit(

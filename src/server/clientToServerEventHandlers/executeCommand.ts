@@ -7,14 +7,14 @@ import { Command } from "../../shared/classes/commands/Command";
 
 ClientToServerEventHandlers.register(
   ClientToServerEvent.executeCommand,
-  (socket: Socket, data: string) => {
+  (socket: Socket, data: string): void => {
     let commandFound: Command | undefined;
     let commandParams: Record<string, string> = {};
 
-    Commands.forEach(command => {
+    Commands.forEach((command): void => {
       if (commandFound) return;
 
-      command.matchers.forEach(matcher => {
+      command.matchers.forEach((matcher): void => {
         const match = data.trim().match(matcher);
         if (match) {
           commandFound = command;

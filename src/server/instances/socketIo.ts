@@ -5,7 +5,7 @@ import { ClientToServerEventHandlers } from "../../shared/classes/ClientToServer
 
 export const socketIo = SocketIo(webServer);
 
-socketIo.on("connection", socket => {
+socketIo.on("connection", (socket): void => {
   socket.emit(
     ServerToClientEvent.print,
     `Welcome adventurer! To join the game, please type
@@ -13,7 +13,7 @@ socketIo.on("connection", socket => {
     For example: <strong><em>Join as John</em></strong>.`
   );
 
-  ClientToServerEventHandlers.forEach((handler, clientToServerEvent) => {
-    socket.on(clientToServerEvent, data => handler(socket, data));
+  ClientToServerEventHandlers.forEach((handler, clientToServerEvent): void => {
+    socket.on(clientToServerEvent, (data): void => handler(socket, data));
   });
 });

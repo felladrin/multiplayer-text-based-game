@@ -9,7 +9,7 @@ export const commandTextarea = document.getElementById(
 
 new AutoGrow(commandTextarea, 5);
 
-commandTextarea.addEventListener("keypress", (event: KeyboardEvent) => {
+commandTextarea.addEventListener("keypress", (event: KeyboardEvent): void => {
   if (event.key !== Key.Enter) return;
   event.preventDefault();
   const command = commandTextarea.value.trim();

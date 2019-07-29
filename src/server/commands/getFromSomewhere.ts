@@ -9,7 +9,7 @@ Commands.register(
     "Get Something From Somewhere",
     "Get something from the somewhere.",
     [/^get (?<what>[A-Za-z]+) (?<where>[A-Za-z]+)$/i],
-    (socket, params) => {
+    (socket, params): void => {
       const player = ConnectedPlayers.findBySocket(socket);
       if (player == null) return;
       socketIo.emit(

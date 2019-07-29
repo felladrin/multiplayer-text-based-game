@@ -4,9 +4,9 @@ import { socketIo } from "../instances/socketIo";
 import { ServerToClientEvent } from "../../shared/enum/ServerToClientEvent";
 
 Commands.register(
-  new Command("Help", "List the commands available.", [/^help$/i], () => {
+  new Command("Help", "List the commands available.", [/^help$/i], (): void => {
     const commandsWithDescription: string[] = [];
-    Commands.forEach(command => {
+    Commands.forEach((command): void => {
       commandsWithDescription.push(`${command.name}: ${command.description}`);
     });
 

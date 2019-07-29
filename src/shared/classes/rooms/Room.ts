@@ -9,7 +9,7 @@ export class Room {
   public readonly creatures: Character[];
   public readonly items: Item[];
 
-  constructor(
+  public constructor(
     name: string,
     description: string,
     exits: Record<Direction, Room | null>
@@ -23,7 +23,7 @@ export class Room {
     this.relinkUndefinedExitsFromOppositeRooms();
   }
 
-  private relinkUndefinedExitsFromOppositeRooms() {
+  private relinkUndefinedExitsFromOppositeRooms(): void {
     for (const exitDirection in this.exits) {
       const oppositeRoom = this.exits[exitDirection as Direction];
 

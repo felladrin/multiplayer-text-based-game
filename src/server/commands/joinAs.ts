@@ -12,7 +12,7 @@ Commands.register(
     "Join As",
     "Join the game with an specific name.",
     [/^join as (?<name>.*)$/i],
-    (socket, params) => {
+    (socket, params): void => {
       const upperCasedName = upperCaseFirst(params.name);
       ConnectedPlayers.register(
         new PlayableCharacter(upperCasedName, cityCenter, socket)

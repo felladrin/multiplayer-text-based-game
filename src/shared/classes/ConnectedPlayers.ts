@@ -4,35 +4,37 @@ import { PlayableCharacter } from "./characters/PlayableCharacter";
 export abstract class ConnectedPlayers {
   private static list: PlayableCharacter[] = [];
 
-  static register(player: PlayableCharacter) {
+  public static register(player: PlayableCharacter): void {
     ConnectedPlayers.list.push(player);
   }
 
-  static removeByName(name: String) {
+  public static removeByName(name: string): void {
     const playerIndexToRemove = ConnectedPlayers.list.findIndex(
-      player => player.name == name
+      (player): unknown => player.name == name
     );
     ConnectedPlayers.list.splice(playerIndexToRemove, 1);
   }
 
-  static removeBySocket(socket: Socket) {
+  public static removeBySocket(socket: Socket): void {
     const playerIndexToRemove = ConnectedPlayers.list.findIndex(
-      player => player.socket == socket
+      (player): unknown => player.socket == socket
     );
     ConnectedPlayers.list.splice(playerIndexToRemove, 1);
   }
 
-  static findBySocket(socket: Socket) {
-    return ConnectedPlayers.list.find(player => player.socket == socket);
+  public static findBySocket(socket: Socket): PlayableCharacter | undefined {
+    return ConnectedPlayers.list.find(
+      (player): unknown => player.socket == socket
+    );
   }
 
-  static forEach(
+  public static forEach(
     callback: (
       value: PlayableCharacter,
       index: number,
       array: PlayableCharacter[]
     ) => void
-  ) {
+  ): void {
     ConnectedPlayers.list.forEach(callback);
   }
 }

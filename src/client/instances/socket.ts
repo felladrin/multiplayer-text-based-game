@@ -4,7 +4,7 @@ import { outputDiv } from "./outputDiv";
 
 export const socket = connect();
 
-socket.on(ServerToClientEvent.print, (event: string) => {
+socket.on(ServerToClientEvent.print, (event: string): void => {
   const isScrollAtBottom =
     Math.floor(outputDiv.scrollHeight - outputDiv.scrollTop) ===
     outputDiv.clientHeight;

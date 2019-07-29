@@ -5,7 +5,7 @@ export class Character {
   public description: string;
   public room: Room;
 
-  constructor(name: string, room: Room) {
+  public constructor(name: string, room: Room) {
     this.name = name;
     this.description = "";
     this.room = room;

@@ -7,7 +7,7 @@ import { ServerToClientEvent } from "../../shared/enum/ServerToClientEvent";
 
 ClientToServerEventHandlers.register(
   ClientToServerEvent.disconnect,
-  (socket: Socket) => {
+  (socket: Socket): void => {
     const onlinePlayer = ConnectedPlayers.findBySocket(socket);
     if (onlinePlayer) {
       socketIo.emit(

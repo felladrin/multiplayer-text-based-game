@@ -1,12 +1,12 @@
 import { Socket } from "socket.io";
 
 export class Command {
-  name: string;
-  description: string;
-  matchers: RegExp[];
-  action: (socket: Socket, params: Record<string, string>) => void;
+  public name: string;
+  public description: string;
+  public matchers: RegExp[];
+  public action: (socket: Socket, params: Record<string, string>) => void;
 
-  constructor(
+  public constructor(
     name: string,
     description: string,
     matchers: RegExp[],

@@ -11,7 +11,7 @@ Commands.register(
     "Go",
     "Go to some direction.",
     [/^go to (?<direction>[A-Za-z]+)$/i, /^go (?<direction>[A-Za-z]+)$/i],
-    (socket, params) => {
+    (socket, params): void => {
       const player = ConnectedPlayers.findBySocket(socket);
 
       if (player == null) return;

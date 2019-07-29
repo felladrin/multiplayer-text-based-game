@@ -4,20 +4,20 @@ import { Command } from "./Command";
 export abstract class Commands {
   private static list: Command[] = [];
 
-  static register = (command: Command) => {
+  public static register = (command: Command): void => {
     Commands.list.push(command);
     Commands.sortByStringProperty(Commands.list, "name");
   };
 
-  static forEach = (
+  public static forEach = (
     callback: (value: Command, index: number, array: Command[]) => void
-  ) => Commands.list.forEach(callback);
+  ): void => Commands.list.forEach(callback);
 
   private static sortByStringProperty = (
     commands: Command[],
     property: KeyOfFilteredByType<Command, string>
-  ) => {
-    commands.sort((a, b) => {
+  ): void => {
+    commands.sort((a, b): number => {
       let propertyFromA = a[property].toUpperCase();
       let propertyFromB = b[property].toUpperCase();
       if (propertyFromA < propertyFromB) return -1;

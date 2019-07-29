@@ -9,7 +9,7 @@ Commands.register(
     "Smile To Someone",
     "Smile to someone in the room.",
     [/^smile to (?<who>[A-Za-z]+)$/i, /^smile (?<who>[A-Za-z]+)$/i],
-    (socket, params) => {
+    (socket, params): void => {
       const player = ConnectedPlayers.findBySocket(socket);
       if (player == null) return;
       socketIo.emit(
