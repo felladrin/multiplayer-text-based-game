@@ -19,5 +19,44 @@ export class Room {
     this.exits = exits;
     this.creatures = [];
     this.items = [];
+
+    this.relinkUndefinedExitsFromOppositeRooms();
+  }
+
+  private relinkUndefinedExitsFromOppositeRooms() {
+    for (const exitDirection in this.exits) {
+      const oppositeRoom = this.exits[exitDirection as Direction];
+
+      if (!oppositeRoom) continue;
+
+      const oppositeDirection = Room.findOppositeDirection(
+        exitDirection as Direction
+      );
+
+      if (typeof oppositeRoom.exits[oppositeDirection] === "undefined") {
+        oppositeRoom.exits[oppositeDirection] = this;
+      }
+    }
+  }
+
+  private static findOppositeDirection(exitDirection: Direction): Direction {
+    switch (exitDirection) {
+      case Direction.North:
+        return Direction.South;
+      case Direction.Northeast:
+        return Direction.Southwest;
+      case Direction.East:
+        return Direction.West;
+      case Direction.Southeast:
+        return Direction.Northwest;
+      case Direction.South:
+        return Direction.North;
+      case Direction.Southwest:
+        return Direction.Northeast;
+      case Direction.West:
+        return Direction.East;
+      case Direction.Northwest:
+        return Direction.Southeast;
+    }
   }
 }
