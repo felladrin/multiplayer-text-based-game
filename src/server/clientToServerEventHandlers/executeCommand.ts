@@ -3,33 +3,25 @@ import { ClientToServerEvent } from "../../shared/enum/ClientToServerEvent";
 import { Socket } from "socket.io";
 import { Commands } from "../../shared/classes/commands/Commands";
 import { ServerToClientEvent } from "../../shared/enum/ServerToClientEvent";
-import { Command } from "../../shared/classes/commands/Command";
 
 ClientToServerEventHandlers.register(
   ClientToServerEvent.executeCommand,
   (socket: Socket, data: string): void => {
-    let commandFound: Command | undefined;
-    let commandParams: Record<string, string> = {};
+    const commandsArray = Commands.toArray();
 
-    Commands.forEach((command): void => {
-      if (commandFound) return;
+    for (let i = 0, l = commandsArray.length; i < l; i++) {
+      const command = commandsArray[i];
+      const commandMatchers = command.matchers;
 
-      command.matchers.forEach((matcher): void => {
-        const match = data.trim().match(matcher);
-        if (match) {
-          commandFound = command;
-          commandParams = match.groups || {};
-        }
-      });
-    });
-
-    if (commandFound) {
-      commandFound.action(socket, commandParams);
-    } else {
-      socket.emit(
-        ServerToClientEvent.print,
-        `Command not found. Type 'help' to see the list of commands available.`
-      );
+      for (let j = 0, m = commandMatchers.length; j < m; j++) {
+        const match = data.trim().match(commandMatchers[j]);
+        if (match) return command.action(socket, match.groups || {});
+      }
     }
+
+    socket.emit(
+      ServerToClientEvent.print,
+      `Command not found. Type 'help' to see the list of commands available.`
+    );
   }
 );

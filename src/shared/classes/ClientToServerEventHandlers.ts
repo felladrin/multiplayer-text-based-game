@@ -14,11 +14,13 @@ export abstract class ClientToServerEventHandlers {
     ClientToServerEventHandlers.map.set(event, handler);
   }
 
-  public static forEach = (
+  public static forEach(
     callback: (
       value: (socket: Socket, data: string) => void,
       key: ClientToServerEvent,
       map: Map<ClientToServerEvent, (socket: Socket, data: string) => void>
     ) => void
-  ): void => ClientToServerEventHandlers.map.forEach(callback);
+  ): void {
+    ClientToServerEventHandlers.map.forEach(callback);
+  }
 }
