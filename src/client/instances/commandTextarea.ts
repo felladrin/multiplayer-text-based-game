@@ -3,9 +3,9 @@ import { ClientToServerEvent } from "../../shared/enum/ClientToServerEvent";
 import { socket } from "./socket";
 import AutoGrow from "textarea-autogrow";
 
-export const commandTextarea = document.getElementById(
-  "command"
-) as HTMLTextAreaElement;
+export const commandTextarea = <HTMLTextAreaElement>(
+  document.getElementById("command")
+);
 
 new AutoGrow(commandTextarea, 5);
 

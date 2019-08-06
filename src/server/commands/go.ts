@@ -16,21 +16,21 @@ Commands.register(
 
       if (player == null) return;
 
-      const goTo = upperCaseFirst(params.direction) as Direction;
+      const goTo = <Direction>upperCaseFirst(params.direction);
 
       if (!player.room.exits[goTo]) {
         socket.emit(ServerToClientEvent.print, `You can't go to ${goTo}.`);
         return;
       }
 
-      player.room = (player.room.exits[goTo] as unknown) as Room;
+      player.room = <Room>player.room.exits[goTo];
 
       socket.emit(ServerToClientEvent.print, `You go to ${goTo}.`);
 
       const exits = [];
 
       for (const direction in Direction) {
-        const directionExit = player.room.exits[direction as Direction];
+        const directionExit = player.room.exits[<Direction>direction];
         if (directionExit === null) continue;
         exits.push(`${directionExit.name} at ${direction}`);
       }

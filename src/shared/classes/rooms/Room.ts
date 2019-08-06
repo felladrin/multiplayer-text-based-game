@@ -24,14 +24,14 @@ export class Room {
   }
 
   private relinkUndefinedExitsFromOppositeRooms(): void {
-    for (const exitDirection in this.exits) {
-      const oppositeRoom = this.exits[exitDirection as Direction];
+    let exitDirection: Direction;
+
+    for (exitDirection in this.exits) {
+      const oppositeRoom = this.exits[exitDirection];
 
       if (!oppositeRoom) continue;
 
-      const oppositeDirection = Room.findOppositeDirection(
-        exitDirection as Direction
-      );
+      const oppositeDirection = Room.findOppositeDirection(exitDirection);
 
       if (typeof oppositeRoom.exits[oppositeDirection] === "undefined") {
         oppositeRoom.exits[oppositeDirection] = this;
