@@ -9,7 +9,7 @@ export abstract class Commands {
     Commands.sortByStringProperty(Commands.array, "name");
   }
 
-  public static toArray(): ReadonlyArray<Command> {
+  public static toArray(): readonly Command[] {
     return Commands.array;
   }
 
