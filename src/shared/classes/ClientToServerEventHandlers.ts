@@ -2,25 +2,32 @@ import { ClientToServerEvent } from "../enum/ClientToServerEvent";
 import { Socket } from "socket.io";
 
 export abstract class ClientToServerEventHandlers {
-  private static map: Map<
+  private static map: ClientToServerEventHandlersMap = new Map<
     ClientToServerEvent,
-    (socket: Socket, data: string) => void
-  > = new Map<ClientToServerEvent, (socket: Socket, data: string) => void>();
+    ClientToServerEventHandler
+  >();
 
   public static register(
     event: ClientToServerEvent,
-    handler: (socket: Socket, data: string) => void
+    handler: ClientToServerEventHandler
   ): void {
     ClientToServerEventHandlers.map.set(event, handler);
   }
 
   public static forEach(
     callback: (
-      value: (socket: Socket, data: string) => void,
+      value: ClientToServerEventHandler,
       key: ClientToServerEvent,
-      map: Map<ClientToServerEvent, (socket: Socket, data: string) => void>
+      map: ClientToServerEventHandlersMap
     ) => void
   ): void {
     ClientToServerEventHandlers.map.forEach(callback);
   }
 }
+
+type ClientToServerEventHandler = (socket: Socket, data: string) => void;
+
+type ClientToServerEventHandlersMap = Map<
+  ClientToServerEvent,
+  ClientToServerEventHandler
+>;

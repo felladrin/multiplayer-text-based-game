@@ -4,13 +4,13 @@ export class Command {
   public name: string;
   public description: string;
   public matchers: RegExp[];
-  public action: (socket: Socket, params: Record<string, string>) => void;
+  public action: CommandAction;
 
   public constructor(
     name: string,
     description: string,
     matchers: RegExp[],
-    action: (socket: Socket, params: Record<string, string>) => void
+    action: CommandAction
   ) {
     this.name = name;
     this.description = description;
@@ -18,3 +18,5 @@ export class Command {
     this.action = action;
   }
 }
+
+type CommandAction = (socket: Socket, params: Record<string, string>) => void;
