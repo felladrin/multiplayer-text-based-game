@@ -1,6 +1,6 @@
 import { createServer } from "http";
 import { expressApp } from "./expressApp";
-import http from "http";
+import https from "https";
 
 export const webServer = createServer(expressApp);
 
@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 webServer.listen(port, (): void => {
   console.log(`Game is now locally available at http://localhost:${port}`);
 
-  http.get({ hostname: "api.ipify.org" }, (response): void => {
+  https.get({ hostname: "api.ipify.org" }, (response): void => {
     let publicIp = "";
     response.on("data", (chunk): void => {
       publicIp += chunk;
