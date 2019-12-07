@@ -4,7 +4,7 @@ import { ConnectedPlayers } from "../../shared/classes/ConnectedPlayers";
 import { Command } from "../../shared/classes/commands/Command";
 import { Direction } from "../../shared/enum/Direction";
 import { Room } from "../../shared/classes/rooms/Room";
-import { upperCaseFirst } from "change-case";
+import { capitalCase } from "change-case";
 
 Commands.register(
   new Command(
@@ -16,7 +16,7 @@ Commands.register(
 
       if (player == null) return;
 
-      const goTo = upperCaseFirst(params.direction) as Direction;
+      const goTo = capitalCase(params.direction) as Direction;
 
       if (!player.room.exits[goTo]) {
         socket.emit(ServerToClientEvent.print, `You can't go to ${goTo}.`);
@@ -29,7 +29,7 @@ Commands.register(
 
       const exits = [];
 
-      for (const direction in Direction) {
+      for (const direction of Object.keys(Direction)) {
         const directionExit = player.room.exits[direction as Direction];
         if (directionExit === null) continue;
         exits.push(`${directionExit.name} at ${direction}`);
