@@ -12,7 +12,7 @@
     // "declarationMap": true,
     // "sourceMap": true,
     // "outFile": "./",
-    "outDir": "../../build",
+    "outDir": "build",
     // "rootDir": "./",
     // "composite": true,
     // "tsBuildInfoFile": "./",
