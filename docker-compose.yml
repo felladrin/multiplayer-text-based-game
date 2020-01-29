@@ -1,0 +1,11 @@
+version: "3.7"
+services:
+  node:
+    image: node:12-slim
+    command: sh -c "npm i && npm run dev"
+    user: node
+    working_dir: /home/node/app
+    volumes:
+      - .:/home/node/app
+    ports:
+      - "${PORT}:${PORT}"
