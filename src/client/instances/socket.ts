@@ -15,7 +15,9 @@ socket.on(ServerToClientEvent.print, (html: string): void => {
 
   outputDiv.append(divToAppend);
 
-  if (outputDiv.children.length > 100) outputDiv.firstChild.remove();
+  if (outputDiv.children.length > 100 && outputDiv.firstChild != null) {
+    outputDiv.firstChild.remove();
+  }
 
   if (isScrollAtBottom) outputDiv.scrollTo(0, outputDiv.scrollHeight);
 });

@@ -11,7 +11,7 @@ new AutoGrow(commandTextarea, 5);
 
 const commandsHistory: string[] = [];
 let currentIndexOnCommandsHistory = commandsHistory.length;
-const clampNumber = (number, min, max): number => {
+const clampNumber = (number: number, min: number, max: number): number => {
   return Math.max(min, Math.min(number, max));
 };
 

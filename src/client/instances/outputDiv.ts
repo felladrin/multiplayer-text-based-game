@@ -1,1 +1,1 @@
-export const outputDiv = document.getElementById("output");
+export const outputDiv = document.getElementById("output") as HTMLDivElement;

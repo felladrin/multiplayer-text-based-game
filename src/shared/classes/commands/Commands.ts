@@ -18,8 +18,8 @@ export abstract class Commands {
     property: KeyOfFilteredByType<Command, string>
   ): void {
     commands.sort((a, b): number => {
-      let propertyFromA = a[property].toUpperCase();
-      let propertyFromB = b[property].toUpperCase();
+      const propertyFromA = a[property].toUpperCase();
+      const propertyFromB = b[property].toUpperCase();
       if (propertyFromA < propertyFromB) return -1;
       if (propertyFromA > propertyFromB) return 1;
       return 0;
