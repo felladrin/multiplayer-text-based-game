@@ -1,11 +1,11 @@
-import SocketIo from "socket.io";
+import { Socket } from "socket.io";
 import { webServer } from "./webServer";
 import { ServerToClientEvent } from "../../shared/enum/ServerToClientEvent";
 import { ClientToServerEventHandlers } from "../../shared/classes/ClientToServerEventHandlers";
 
-export const socketIo = SocketIo(webServer);
+export const socketIo = require("socket.io")(webServer);
 
-socketIo.on("connection", (socket): void => {
+socketIo.on("connection", (socket: Socket): void => {
   socket.emit(
     ServerToClientEvent.print,
     `Welcome adventurer! To join the game, please type
@@ -14,6 +14,8 @@ socketIo.on("connection", (socket): void => {
   );
 
   ClientToServerEventHandlers.forEach((handler, clientToServerEvent): void => {
-    socket.on(clientToServerEvent, (data): void => handler(socket, data));
+    socket.on(clientToServerEvent, (data: string): void =>
+      handler(socket, data)
+    );
   });
 });
