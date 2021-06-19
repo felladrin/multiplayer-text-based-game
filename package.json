@@ -10,8 +10,8 @@
   "scripts": {
     "start": "run-s clean-build-dir parcel-build compile-and-run",
     "dev": "run-p parcel-watch ts-node-dev",
-    "parcel-watch": "parcel watch src/client/index.html -d build/client",
-    "parcel-build": "parcel build src/client/index.html -d build/client --no-source-maps",
+    "parcel-watch": "parcel watch src/client/index.html --dist-dir build/client",
+    "parcel-build": "parcel build src/client/index.html --dist-dir build/client --no-source-maps",
     "compile-and-run": "(cd src/server && tsc) && (cd build/server && node .)",
     "ts-node-dev": "ts-node-dev src/server/index.ts",
     "lint": "eslint \"src/**/*.{js,ts}\" --fix",
@@ -23,7 +23,7 @@
     "express": "^4.17.1",
     "normalize.css": "^8.0.1",
     "npm-run-all": "^4.1.5",
-    "parcel-bundler": "^1.12.5",
+    "parcel": "^2.0.0-beta.3.1",
     "require-all": "^3.0.0",
     "rimraf": "^3.0.2",
     "socket.io": "^4.1.2",
@@ -34,7 +34,9 @@
     "typescript": "^4.3.4"
   },
   "devDependencies": {
+    "@parcel/transformer-sass": "^2.0.0-beta.3.1",
     "@types/express": "^4.17.12",
+    "@types/require-all": "^3.0.2",
     "@types/socket.io": "^3.0.1",
     "@types/socket.io-client": "^1.4.36",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
